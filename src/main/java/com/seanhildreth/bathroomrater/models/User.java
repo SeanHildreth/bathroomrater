@@ -3,6 +3,7 @@ package com.seanhildreth.bathroomrater.models;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,13 +19,23 @@ public class User {
     private String city;
     private String state;
     private String zip;
-    private Date birthdate;
+//    private Date birthdate;
     private String password;
     @Transient
     private String passwordConfirmation;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Rating> ratings;
     @Column(updatable = false)
     private Date createdAt;
     private Date updatedAt;
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     public Long getId() {
         return id;
@@ -90,13 +101,13 @@ public class User {
         this.zip = zip;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
+//    public Date getBirthdate() {
+//        return birthdate;
+//    }
+//
+//    public void setBirthdate(Date birthdate) {
+//        this.birthdate = birthdate;
+//    }
 
     public String getPassword() {
         return password;

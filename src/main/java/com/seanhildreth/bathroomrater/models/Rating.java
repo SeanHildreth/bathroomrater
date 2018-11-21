@@ -11,9 +11,29 @@ public class Rating {
     private Long id;
     private Integer rating;
     private String review;
+    private String place_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(updatable = false)
     private Date createdAt;
     private Date updatedAt;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getPlace_id() {
+        return place_id;
+    }
+
+    public void setPlace_id(String place_id) {
+        this.place_id = place_id;
+    }
 
     public Long getId() {
         return id;
