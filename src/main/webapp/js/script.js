@@ -70,6 +70,42 @@ function initialize() {
         }
     });
     var clickHandler = new ClickEventHandler(map, origin);
+
+    // Create the search box and link it to the UI element.
+    var input = document.getElementById('pac-input');
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+        searchBox.setBounds(map.getBounds());
+    });
+
+    // Listen for the event fired when the user selects a prediction and retrieve
+    // more details for that place.
+    searchBox.addListener('places_changed', function() {
+        var places = searchBox.getPlaces();
+
+        if (places.length == 0) {
+            return;
+        }
+
+        // For each place, get the name and location.
+        var bounds = new google.maps.LatLngBounds();
+        places.forEach(function(place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+
+            if (place.geometry.viewport) {
+                // Only geocodes have viewport.
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
 }
 
 var ClickEventHandler = function(map, origin) {
@@ -100,19 +136,20 @@ ClickEventHandler.prototype.getPlaceInformation = function(placeId) {
     var me = this;
     this.placesService.getDetails({placeId: placeId}, function (place, status) {
         if (status === 'OK') {
-            $card.classList.replace("hide", "show");
             document.getElementById('placeHeader').textContent = place.name;
             document.getElementById('placeAddress').textContent = place.formatted_address;
-            document.getElementById('hiddenId').value = place.place_id;
-            document.getElementById('hiddenName').value = place.name;
-            document.getElementById('hiddenAddress').value = place.formatted_address;
-            document.getElementById('hiddenId2').value = place.place_id;
-            document.getElementById('hiddenName2').value = place.name;
-            document.getElementById('hiddenAddress2').value = place.formatted_address;
-            const xhtml = new XMLHttpRequest();
-            xhtml.post("/getReviews",
-                {myData: place.place_id}
-                );
+            $.post('/getReviews',
+                {hiddenId: place.place_id, hiddenName: place.name, hiddenAddress: place.formatted_address},
+                function() {
+                    alert('This ran, but did it work?');
+                },
+                'none');
+            $('#overallRating').load(document.URL +  ' #overallRating');
+            $('#allReviews').load(document.URL +  ' #allReviews');
+            $('#cardBody').load(document.URL +  ' #cardBody');
         }
+        $card.classList.replace("hide", "show");
+        document.getElementById('placeHeader').textContent = place.name;
+        document.getElementById('placeAddress').textContent = place.formatted_address;
     });
 };

@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping("/")
     public String loginReg(@ModelAttribute("user") User user, HttpSession session) {
-        if(session.getAttribute("user") != null) { return "redirect:/ideas"; }
+        if(session.getAttribute("user") != null) { return "redirect:/dashboard"; }
         return "loginReg.jsp";
     }
 

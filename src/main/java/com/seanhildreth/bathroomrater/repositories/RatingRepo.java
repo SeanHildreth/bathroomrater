@@ -12,6 +12,9 @@ public interface RatingRepo extends CrudRepository<Rating, Long> {
     @Query(value = "SELECT * FROM ratings WHERE place_id = ?1", nativeQuery = true)
     List<Rating> findAllByPlace(String place);
 
+    @Query(value = "SELECT * FROM ratings WHERE place_id = ?1 ORDER BY updated_at DESC", nativeQuery = true)
+    List<Rating> findAllByPlaceRev(String place);
+
     @Query(value = "SELECT COUNT(rating) FROM ratings WHERE place_id = ?1", nativeQuery = true)
     Integer ratingCount(String place);
 

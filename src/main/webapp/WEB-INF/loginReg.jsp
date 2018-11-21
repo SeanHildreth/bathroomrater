@@ -29,6 +29,7 @@
     <body>
         <div class="page bg-primary pt-5"  style="background-image: url('../assets/goldenbowl.png'); height: 1480px; width: 720px;">
             <div class="container-fluid">
+                <h1>$H!T U NOT!</h1>
                 <div class="row mx-auto">
                     <div class="col">
                         <div class="accordion" id="accordionExample">

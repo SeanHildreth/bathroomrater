@@ -20,6 +20,8 @@ public class RatingService {
 
     public List<Rating> findAllByPlace(String place) { return ratingRepo.findAllByPlace(place); }
 
+    public List<Rating> findAllByPlaceRev(String place) { return ratingRepo.findAllByPlaceRev(place); }
+
     public Rating createRating(Rating rating, User user) {
         rating.setUser(user);
         return ratingRepo.save(rating);

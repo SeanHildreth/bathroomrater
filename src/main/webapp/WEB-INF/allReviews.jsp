@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <!doctype html>
@@ -34,40 +35,47 @@
                 <a class="btn btn-secondary" href="/logout" role="button">Logout!</a>
                 <h1>All Reviews</h1>
                 <h3>Overall Rating:
+                    <c:if test="${avgRating == 0 || avgRating == null}">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                    </c:if>
                     <c:if test="${avgRating == 1}">
-                        <img src="../assets/toilet1.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
+                        <img src="../assets/toilet1.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
                     </c:if>
                     <c:if test="${avgRating == 2}">
-                        <img src="../assets/toilet1.png" height="30px">
-                        <img src="../assets/toilet2.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
+                        <img src="../assets/toilet1.png" height="40px">
+                        <img src="../assets/toilet2.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
                     </c:if>
                     <c:if test="${avgRating == 3}">
-                        <img src="../assets/toilet1.png" height="30px">
-                        <img src="../assets/toilet2.png" height="30px">
-                        <img src="../assets/toilet3.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
+                        <img src="../assets/toilet1.png" height="40px">
+                        <img src="../assets/toilet2.png" height="40px">
+                        <img src="../assets/toilet3.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
                     </c:if>
                     <c:if test="${avgRating == 4}">
-                        <img src="../assets/toilet1.png" height="30px">
-                        <img src="../assets/toilet2.png" height="30px">
-                        <img src="../assets/toilet3.png" height="30px">
-                        <img src="../assets/toilet4.png" height="30px">
-                        <img src="../assets/toiletgrey.png" height="30px">
+                        <img src="../assets/toilet1.png" height="40px">
+                        <img src="../assets/toilet2.png" height="40px">
+                        <img src="../assets/toilet3.png" height="40px">
+                        <img src="../assets/toilet4.png" height="40px">
+                        <img src="../assets/toiletgrey.png" height="40px">
                     </c:if>
                     <c:if test="${avgRating == 5}">
-                        <img src="../assets/toilet1.png" height="30px">
-                        <img src="../assets/toilet2.png" height="30px">
-                        <img src="../assets/toilet3.png" height="30px">
-                        <img src="../assets/toilet4.png" height="30px">
-                        <img src="../assets/toilet5.png" height="30px">
+                        <img src="../assets/toilet1.png" height="40px">
+                        <img src="../assets/toilet2.png" height="40px">
+                        <img src="../assets/toilet3.png" height="40px">
+                        <img src="../assets/toilet4.png" height="40px">
+                        <img src="../assets/toilet5.png" height="40px">
                     </c:if>
                 (${ratingCount})</h3>
             </div>
@@ -75,18 +83,65 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Rating</th>
-                        <th scope="col">Review</th>
                         <th scope="col">User</th>
-                        <th scope="col">Action</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Review</th>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${allReviews}" var="rev">
                         <tr>
-                            <th scope="row">${rev.rating}</th>
-                            <td>${rev.review} </td>
+                            <th scope="row" style="width: 30%">
+                                <c:if test="${rev.rating == 0}">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                </c:if>
+                                <c:if test="${rev.rating == 1}">
+                                    <img src="../assets/toilet1.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                </c:if>
+                                <c:if test="${rev.rating == 2}">
+                                    <img src="../assets/toilet1.png" height="40px">
+                                    <img src="../assets/toilet2.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                </c:if>
+                                <c:if test="${rev.rating == 3}">
+                                    <img src="../assets/toilet1.png" height="40px">
+                                    <img src="../assets/toilet2.png" height="40px">
+                                    <img src="../assets/toilet3.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                </c:if>
+                                <c:if test="${rev.rating == 4}">
+                                    <img src="../assets/toilet1.png" height="40px">
+                                    <img src="../assets/toilet2.png" height="40px">
+                                    <img src="../assets/toilet3.png" height="40px">
+                                    <img src="../assets/toilet4.png" height="40px">
+                                    <img src="../assets/toiletgrey.png" height="40px">
+                                </c:if>
+                                <c:if test="${rev.rating == 5}">
+                                    <img src="../assets/toilet1.png" height="40px">
+                                    <img src="../assets/toilet2.png" height="40px">
+                                    <img src="../assets/toilet3.png" height="40px">
+                                    <img src="../assets/toilet4.png" height="40px">
+                                    <img src="../assets/toilet5.png" height="40px">
+                                </c:if>
+                            </th>
                             <td>${rev.user.email}</td>
-                            <td>Delete</td>
+                        </tr>
+                        <tr>
+                            <td><fmt:formatDate pattern="dd MMM, yyyy h:mm a" value="${rev.updatedAt}" /></td>
+                            <td>${rev.review}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
